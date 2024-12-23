@@ -1,0 +1,15 @@
+name: "Conventional Commits Check"
+on:
+  pull_request:
+
+jobs:
+  conventional-commits-check:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Conventional Commits Checker
+        uses: davidglezz/action-conventional-commits-check@v1.0.0
+        with:
+          target-branch: ${{ github.event.pull_request.base.ref }}
+          current-branch: ${{ github.event.pull_request.head.ref }}
