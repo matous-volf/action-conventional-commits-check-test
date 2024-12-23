@@ -14,4 +14,5 @@ jobs:
         with:
           target-branch: ${{ github.event.pull_request.base.ref }}
           current-branch: ${{ github.event.pull_request.head.ref }}
-          pattern: "^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test){1}(\([[:alnum:]._-]+\))?(!)?: ([[:alnum:]])+([[:space:][:print:]]*)$"
+          pattern: >
+            ^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test){1}(\([[:alnum:]._-]+\))?(!)?: ([[:alnum:]])+([[:space:][:print:]]*)$
