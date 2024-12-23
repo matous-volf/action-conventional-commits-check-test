@@ -1,17 +1,28 @@
-name: "Conventional Commits Check"
+name: conventional commit messages check
+
 on:
   pull_request:
+    types: [ opened, synchronize, reopened, edited ]
+
+permissions: { }
 
 jobs:
-  conventional-commits-check:
+  build:
+    name: conventional commit messages check
     runs-on: ubuntu-22.04
+    permissions:
+      contents: read
+      pull-requests: read
+      packages: read
+      statuses: write
     steps:
-      - uses: actions/checkout@v4
+      - name: code checkout
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Conventional Commits Checker
+      - name: conventional commit messages check
         uses: davidglezz/action-conventional-commits-check@v1.0.0
         with:
           target-branch: ${{ github.event.pull_request.base.ref }}
           current-branch: ${{ github.event.pull_request.head.ref }}
-          pattern: "^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test){1}(\\([[:alnum:]._-]+\\))?(!)?: ([[:alnum:]])+([[:space:][:print:]]*)$"
+          pattern: "^(build|chore|ci|docs|feat|fix|hotfix|perf|refactor|revert|style|test){1}(\\([[:alnum:]._-]+\\))?(!)?: ([[:alnum:]])+([[:space:][:print:]]*)$"
